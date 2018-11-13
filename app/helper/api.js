@@ -1,5 +1,6 @@
 var axios = require("axios");
-var appid = "2ef6cc34aad746d0b020552808c543f9";
+var appid  = "2ef6cc34aad746d0b020552808c543f9";
+var moment = require("moment");
 
 function getForecast(zipcode) {
   return axios
@@ -14,12 +15,23 @@ function getForecast(zipcode) {
     });
 }
 
-// function getFiveDayForcast(data) {
-//   var forcastArgs = {};
-//   return data.reduce(function( day , forecast ) {
-//       if (!day[forecast.list] )
-//   }, forcastArgs );
-// }
+function convertToDisplayDate($date_txt) {
+  var m = moment($date_txt, "YYYY-MM-DD");
+  return m.format("dddd, MMM D");
+}
+
+function getFiveDayForcast(forecastData) {
+  var initialValue = {};
+  var results      = forecastData.reduce(function(fivedayData, forecast) {
+    var displayDate = convertToDisplayDate(forecast.dt_txt);
+    if (!fivedayData[displayDate]) {
+      fivedayData[displayDate] = forecast;
+    }
+    return fivedayData;
+  }, initialValue);
+
+  return results;
+}
 
 function handleError(error) {
   console.warn(error);
@@ -30,7 +42,7 @@ module.exports = {
   fetchFiveDayForecast: function(zipcode) {
     return getForecast(zipcode)
       .then(function(data) {
-        return data;
+        return getFiveDayForcast(data);
       })
       .catch(handleError);
   }

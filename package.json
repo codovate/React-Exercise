@@ -24,6 +24,7 @@
   "homepage": "https://github.com/ReactjsProgram/react-fundamentals-curriculum#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.22.2",
     "prop-types": "^15.5.8",
     "query-string": "^6.2.0",
     "react": "^15.5.3",

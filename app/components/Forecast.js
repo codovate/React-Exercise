@@ -27,7 +27,7 @@ class Forecast extends React.Component {
   }
 
   render() {
-    return <div>HELLO WORLD ! {this.state.dailyForecast}</div>;
+    return <div>{JSON.stringify(this.state.dailyForecast, null, 2)}</div>;
   }
 }
 
