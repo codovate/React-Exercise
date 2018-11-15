@@ -24,11 +24,36 @@ function getFiveDayForcast(forecastData) {
   var initialValue = {};
   var results      = forecastData.reduce(function(fivedayData, forecast) {
     var displayDate = convertToDisplayDate(forecast.dt_txt);
-    if (!fivedayData[displayDate]) {
+    if (!fivedayData[displayDate] && Object.keys(fivedayData).length < 5) {
       fivedayData[displayDate] = forecast;
     }
     return fivedayData;
   }, initialValue);
+
+  return results;
+}
+
+function fiveDayShortDetails(forecastData) {
+  var initialData = {};
+  var results     = Object.keys(forecastData).reduce(function(
+    daysBriefInfo,
+    forecast,
+    index
+  ) {
+    //console.log(forecastData[forecast]);
+    //var           dayName         = "day" + index;
+    // daysBriefInfo[index]          = {};
+    // daysBriefInfo[index][dayName] = {};
+
+    //console.log(daysBriefInfo);
+
+    daysBriefInfo[index] = {
+      day         : forecast,
+      forecastIcon: forecastData[forecast].weather[0].icon
+    };
+    return daysBriefInfo;
+  },
+  initialData);
 
   return results;
 }
@@ -43,6 +68,9 @@ module.exports = {
     return getForecast(zipcode)
       .then(function(data) {
         return getFiveDayForcast(data);
+      })
+      .then(function(data) {
+        return fiveDayShortDetails(data);
       })
       .catch(handleError);
   }
