@@ -40,17 +40,11 @@ function fiveDayShortDetails(forecastData) {
     forecast,
     index
   ) {
-    //console.log(forecastData[forecast]);
-    //var           dayName         = "day" + index;
-    // daysBriefInfo[index]          = {};
-    // daysBriefInfo[index][dayName] = {};
-
-    //console.log(daysBriefInfo);
-
     daysBriefInfo[index] = {
       day         : forecast,
       forecastIcon: forecastData[forecast].weather[0].icon
     };
+
     return daysBriefInfo;
   },
   initialData);

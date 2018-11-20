@@ -1,5 +1,6 @@
 var React = require("react");
 var ZipCode  = require("./ZipCode");
+var Navbar   = require("./Navbar");
 var Redirect = require("react-router-dom").Redirect;
 
 class Home extends React.Component {
@@ -28,10 +29,9 @@ class Home extends React.Component {
     }
     return (
       <div className="container">
-        <div className="navbar">
-          <h1>Clever Title</h1>
+        <Navbar title="Weather App">
           <ZipCode direction="row" onSubmitZipcode={this.handleSubmit} />
-        </div>
+        </Navbar>
 
         <div
           className = "home-container"

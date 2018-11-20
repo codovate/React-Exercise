@@ -10,7 +10,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/forecast" component={Forecast} />
+          <Route exact path="/forecast" component={Forecast} />
         </Switch>
       </BrowserRouter>
     );
