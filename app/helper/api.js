@@ -7,7 +7,7 @@ function getForecast(zipcode) {
     .get(
       "http://api.openweathermap.org/data/2.5/forecast?q=" +
         zipcode +
-        "&appid=" +
+        "&units=imperial&appid=" +
         appid
     )
     .then(function(forecast) {
@@ -42,7 +42,12 @@ function fiveDayShortDetails(forecastData) {
   ) {
     daysBriefInfo[index] = {
       day         : forecast,
-      forecastIcon: forecastData[forecast].weather[0].icon
+      forecastIcon: forecastData[forecast].weather[0].icon,
+      data:  { description:  forecastData[forecast].weather[0].description,
+              minTemp:   forecastData[forecast].main.temp_min,
+              maxTemp : forecastData[forecast].main.temp_max,
+              humidity: forecastData[forecast].main.humidity,
+      }
     };
 
     return daysBriefInfo;
